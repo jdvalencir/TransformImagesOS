@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../Menu/Menu.h"
-#include "../Mapping/Mapping.h"
+#include "../Mapping/Secuencial/Mapping.h"
 #include "../BMPReadWrite/BMPReadWrite.h"
 
 using namespace std;

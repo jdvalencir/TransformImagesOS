@@ -1,6 +1,8 @@
 #include <cmath>
-#include "../Mapping/Mapping.h"
-#include "../Transformations/Transformations.h"
+#include "Mapping.h"
+#include "../../Transformations/Transformations.h"
+
+using namespace std;
 
 vector<vector<Pixel>> translationImage(const vector<vector<Pixel>>& matrix, double X, double Y){
     int rows = matrix.size();
