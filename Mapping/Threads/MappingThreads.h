@@ -13,4 +13,6 @@ void scalePart(const std::vector<std::vector<Pixel>>& image, std::vector<std::ve
 
 std::vector<std::vector<Pixel>> scaleImageThreads(const std::vector<std::vector<Pixel>>& image, double W, double H);
 
+
+
 #endif

@@ -15,8 +15,11 @@ int main(int argc, char *argv[]) {
         int option = receiveOptionByUser();    
         if(option == 9) break; 
         
-        vector<vector<Pixel>> ReadMatrix = convertImageToMatrix(readFileName.c_str());        
+        vector<vector<Pixel>> ReadMatrix = convertImageToMatrix(readFileName.c_str());
+
+        
         resultMatrix = executeOption(ReadMatrix, option);
+        
         saveImage(resultMatrix);
     }
     return 0;
