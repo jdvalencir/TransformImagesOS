@@ -32,18 +32,23 @@ vector<vector<Pixel>> scaleImage(const vector<vector<Pixel>>& image, double W, d
     
     vector<vector<Pixel>> scaledMatrix(newHeight, vector<Pixel>(newWidth));
 
-    for (int y = 0; y < rows; y++) {
-        for (int x = 0; x < cols; x++) {
+    for (int y = 0; y < newHeight; y++) {
+        for (int x = 0; x < newWidth; x++) {
             Point scaledPoint;
             scaledPoint.y = y;
             scaledPoint.x = x;
-            scaledPoint = scalePoint(scaledPoint, W, H);
-            if (scaledPoint.x < newWidth && scaledPoint.y < newHeight) {
-                scaledMatrix[scaledPoint.y][scaledPoint.x] = image[y][x];
-            }
+            scaledPoint = scalePoint(scaledPoint, 1.0 / W, 1.0 / H);
+                                    
+            int nearestX = static_cast<int>(round(scaledPoint.x));
+            int nearestY = static_cast<int>(round(scaledPoint.y));
+            
+            // Make sure the nearest point is within the original image bounds
+            nearestX = max(0, min(cols - 1, nearestX));
+            nearestY = max(0, min(rows - 1, nearestY));
+            
+            scaledMatrix[y][x] = image[nearestY][nearestX];
         }
     }
-
     return scaledMatrix;
 }
 
