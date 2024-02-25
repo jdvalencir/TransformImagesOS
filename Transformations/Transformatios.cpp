@@ -1,5 +1,5 @@
-#include "Transformations/Transformations.h"
 #include <cmath>
+#include "Transformations.h"
 
 Point translatePoint(Point& p, double x, double y){    
     p.x += x;
@@ -41,9 +41,11 @@ Point reflectPointOrigin(Point& p){
 }
 
 Point reflectPointX(Point& p){
-    
+    p.y *= -1;
+    return p;
 }
 
 Point reflectPointY(Point& p){
-
+    p.x *= -1;
+    return p;
 }

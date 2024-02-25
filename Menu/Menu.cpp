@@ -1,16 +1,18 @@
-#include <Menu/Menu.h>
 #include <iostream>
-#include <Mapping/Mapping.h>
+#include "../Menu/Menu.h"
+#include "../Mapping/Mapping.h"
+#include "../BMPReadWrite/BMPReadWrite.h"
 
 using namespace std;
 
-#define BLUE 0x001F      
-#define GREEN 0x07E0     
-#define RED 0xF800      
-#define ORANGE 0xFD20 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m" 
 
 void printMenu(){
-    cout << GREEN <<"----------- MENU -------------" << endl;
+    cout << GREEN << "----------- MENU -------------" << endl;
     cout << BLUE << "1- Translate image" << endl;
     cout << BLUE << "2- Scale image" << endl;
     cout << BLUE << "3- Rotate image" << endl;
@@ -25,46 +27,69 @@ void printMenu(){
 
 int receiveOptionByUser(){
     char option; 
-    cout << ORANGE << "Enter your option: " << endl;
+    cout << YELLOW << "Enter your option: " << endl;
     cin >> option;
-    if(option >= 49 && opcion <= 57) return opcion - 48;
+    if(option >= 49 && option <= 57) return option - 48;
     return 0;
 }
 
-vector<vector<Pixel>> executeOption(vector<vector<Pixel>> matrix, char option){
+string getFileName() {
+    string fileName;
+    cout << YELLOW << "Enter the name of the file: " << endl;
+    cin >> fileName;
+    return fileName;
+}
+
+string getImageName(){
+    string saveFileName;
+    cout << YELLOW << "Enter the name of the file to save: " << endl;
+    cin >> saveFileName;
+    return saveFileName;
+}
+
+vector<vector<Pixel>> convertImageToMatrix(const char* fileName){
+    vector<vector<Pixel>> readImageMatrix = readBMPFile(fileName);
+    return readImageMatrix;
+}
+
+void saveImage(const vector<vector<Pixel>>& resultMatrix) {
+    string saveFileName = getImageName();
+    const char* saveFileNameChar = saveFileName.c_str();
+    saveBPMImage(saveFileNameChar, resultMatrix);
+}
+
+vector<vector<Pixel>> executeOption(const vector<vector<Pixel>>& matrix, int option){
     vector<vector<Pixel>> resultMatrix; 
-    switch (opcion) {
+    double angle;
+    switch (option) {
     case 1:
         double X, Y;
-        cout << ORANGE << "Enter X: " << endl;
+        cout << YELLOW << "Enter X: " << endl;
         cin >> X;
-        cout << ORANGE << "Enter Y: " << endl;
-        cint >> Y;
-        resultMatrix = translationImage(matrix, x, y);
+        cout << YELLOW << "Enter Y: " << endl;
+        cin >> Y;
+        resultMatrix = translationImage(matrix, X, Y);
         break;
     case 2:
         double W, H;
-        cout << ORANGE << "Enter W: " << endl;
+        cout << YELLOW << "Enter W: " << endl;
         cin >> W;
-        cout << ORANGE << "Enter H: " << endl;
+        cout << YELLOW << "Enter H: " << endl;
         cin >> H;
         resultMatrix = scaleImage(matrix, W, H);
         break;
     case 3: 
-        float angle;
-        cout << ORANGE << "Enter the angle: " << endl;
+        cout << YELLOW << "Enter the angle: " << endl;
         cin >> angle;
         resultMatrix = rotateImage(matrix, angle);
         break;
     case 4: 
-        float angle; 
-        cout << ORANGE << "Enter the angle: " << endl;
+        cout << YELLOW << "Enter the angle: " << endl;
         cin >> angle;
         resultMatrix = skewImageX(matrix, angle);
         break;
     case 5: 
-        float angle; 
-        cout << ORANGE << "Enter the angle: " << endl;
+        cout << YELLOW << "Enter the angle: " << endl;
         cin >> angle;
         resultMatrix = skewImageY(matrix, angle);
         break;
@@ -75,7 +100,7 @@ vector<vector<Pixel>> executeOption(vector<vector<Pixel>> matrix, char option){
         resultMatrix = reflectionImageX(matrix);
         break;
     case 8: 
-        resultMatrix = reflectionImagey(matrix);
+        resultMatrix = reflectionImageY(matrix);
         break;
     default:
         cout << RED << "We do not have this option, sorry!" << endl;

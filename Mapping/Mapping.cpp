@@ -1,6 +1,6 @@
 #include <cmath>
-#include <Mapping/Mapping.h>
-#include <Transformations/Transformations.h>
+#include "../Mapping/Mapping.h"
+#include "../Transformations/Transformations.h"
 
 vector<vector<Pixel>> translationImage(const vector<vector<Pixel>>& matrix, double X, double Y){
     int rows = matrix.size();
@@ -32,8 +32,8 @@ vector<vector<Pixel>> scaleImage(const vector<vector<Pixel>>& image, double W, d
     
     vector<vector<Pixel>> scaledMatrix(newHeight, vector<Pixel>(newWidth));
 
-    for (int y = 0; y < rows; ++y) {
-        for (int x = 0; x < cols; ++x) {
+    for (int y = 0; y < rows; y++) {
+        for (int x = 0; x < cols; x++) {
             Point scaledPoint;
             scaledPoint.y = y;
             scaledPoint.x = x;
@@ -73,7 +73,7 @@ vector<vector<Pixel>> mapMatrixToRotateMatrix(const vector<vector<Pixel>>& matri
     return  mapImgMatrix;
 }
 
-vector<vector<Pixel>> rotateImage(vector<vector<Pixel>>& matrix, double angle){
+vector<vector<Pixel>> rotateImage(const vector<vector<Pixel>>& matrix, double angle){
     int rowsHeight = matrix.size();
     int colsWidth = matrix[0].size();
     float angleRad = angle * M_PI / 180;
@@ -147,8 +147,8 @@ vector<vector<Pixel>> skewImageY(const vector<vector<Pixel>>& matrix, float angl
 
     vector<vector<Pixel>> skewedMatrix(skewImageHeight, vector<Pixel>(skewImageWidth));
 
-    int skewMatrixHeight = skewedMatrix[0].size();
-    int skewMatrixWidth = skewedMatrix.size();
+    int skewMatrixHeight = skewedMatrix.size();
+    int skewMatrixWidth = skewedMatrix[0].size();
     
     for(int y = 0; y < rows; y++){
         for(int x = 0; x < cols; x++){
@@ -176,10 +176,10 @@ vector<vector<Pixel>> reflectionImageOrigin(const vector<vector<Pixel>>& matrix)
 
     for(int y = 0; y < rows; y++){
         for(int x = 0; x < cols; x++){
-            Point reflectedPoint;
-            reflectedPoint.y = y;
-            reflectedPoint.x = x;
-            Point reflectedOriginPoint = reflectPointOrigin(reflectedOriginPoint);
+            Point reflectedOriginPoint;
+            reflectedOriginPoint.y = y;
+            reflectedOriginPoint.x = x;
+            reflectedOriginPoint = reflectPointOrigin(reflectedOriginPoint);
             if(reflectedOriginPoint.y < rows && reflectedOriginPoint.x < cols){
                 reflectedOriginMatrix[abs(reflectedOriginPoint.y + centerY)][abs(reflectedOriginPoint.x + centerX)] = matrix[y][x];
             }
@@ -190,10 +190,45 @@ vector<vector<Pixel>> reflectionImageOrigin(const vector<vector<Pixel>>& matrix)
 
 
 vector<vector<Pixel>> reflectionImageX(const vector<vector<Pixel>>& matrix){
-    
-    return  ;
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+
+    vector<vector<Pixel>> reflectedXMatrix(rows * 2, vector<Pixel>(cols)); 
+    int centerX = reflectedXMatrix[0].size() / 2;
+    int centerY = reflectedXMatrix.size() / 2;
+
+    for(int y = 0; y < rows; y++){
+        for(int x = 0; x < cols; x++){
+            Point reflectedXPoint;
+            reflectedXPoint.y = y;
+            reflectedXPoint.x = x;
+            reflectedXPoint = reflectPointX(reflectedXPoint);
+            if(reflectedXPoint.y < rows && reflectedXPoint.x < cols){
+                reflectedXMatrix[abs(reflectedXPoint.y + centerY)][abs(reflectedXPoint.x) ] = matrix[y][x];
+            }
+        }
+    }
+    return reflectedXMatrix;
 }
+
 vector<vector<Pixel>> reflectionImageY(const vector<vector<Pixel>>& matrix){
-    
-    return ;
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+
+    vector<vector<Pixel>> reflectedYMatrix(rows , vector<Pixel>(cols * 2 )); 
+    int centerX = reflectedYMatrix[0].size() / 2;
+    int centerY = reflectedYMatrix.size() / 2;
+
+    for(int y = 0; y < rows; y++){
+        for(int x = 0; x < cols; x++){
+            Point reflectedYPoint; 
+            reflectedYPoint.y = y;
+            reflectedYPoint.x = x; 
+            reflectedYPoint = reflectPointY(reflectedYPoint);
+            if(reflectedYPoint.y < rows && reflectedYPoint.x < cols){
+                reflectedYMatrix[abs(reflectedYPoint.y )][abs(reflectedYPoint.x + centerX)] = matrix[y][x];
+            }
+        }
+    }
+    return reflectedYMatrix;
 }

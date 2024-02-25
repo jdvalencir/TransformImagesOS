@@ -2,12 +2,15 @@
 #define MENU_H
 
 #include <vector>
-#include <Structs/Pixel.h>
-
+#include "../Structs/Pixel.h"
 using namespace std;
 
 void printMenu();
 int receiveOptionByUser();
-vector<vector<Pixel>> executeOption(char option);
+string getFileName(); 
+string getImageName();
+vector<vector<Pixel>> convertImageToMatrix(const char* fileName);
+vector<vector<Pixel>> executeOption(const vector<vector<Pixel>>& matrix, int option);
+void saveImage(const vector<vector<Pixel>>& resultMatrix);
 
 #endif

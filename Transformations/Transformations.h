@@ -1,7 +1,7 @@
 #ifndef TRANSFORMATIONS_H
 #define TRANSFORMATIONS_H
 
-#include <Structs/Point.h>
+#include "../Structs/Point.h"
 
 Point translatePoint(Point& p, double x, double y);
 Point scalePoint(Point& p, double W, double H);

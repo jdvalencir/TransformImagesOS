@@ -2,8 +2,8 @@
 #define MAPPING_H
 
 #include <vector>
-#include <Structs/Pixel.h>
-#include <Structs/Point.h>
+#include "../Structs/Pixel.h"
+#include "../Structs/Point.h"
 
 using namespace std;
 
