@@ -52,7 +52,8 @@ g++ main.cpp BMPReadWrite/BMPReadWrite.cpp Mapping/Secuencial/Mapping.cpp Mappin
 
 ![image](https://github.com/jdvalencir/TransformImagesOS/assets/81880494/7f0d2a16-8b8b-4ce1-a3ca-d1cbdfa78172)
 
-Difference between the original pic of Lena and "Lena Scale"
+* Difference between the original pic of Lena and "Lena Scale"
+
 ![image](https://github.com/jdvalencir/TransformImagesOS/assets/81880494/a0bf94b0-760a-48bd-85e5-3383bb71cdf6)
 
 # 3) ROTATE IMAGE
