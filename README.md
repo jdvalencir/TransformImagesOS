@@ -31,7 +31,7 @@ Open the project folder in Visual Studio Code or any preferred code editor.
 # OPEN TERMINAL
 Follow this steps for run the program:
 ```bash 
-g++ main.cpp BMPReadWrite/BMPReadWrite.cpp Mapping/Mapping.cpp Menu/Menu.cpp Transformations/Transformatios.cpp -o transformations -fopenmp
+g++ main.cpp BMPReadWrite/BMPReadWrite.cpp Mapping/Secuencial/Mapping.cpp Mapping/OpenMp/MappingOpenMP.cpp Menu/Menu.cpp Transformations/Transformatios.cpp -o transformations -fopenmp
 ```
 ```bash
 ./transformations
