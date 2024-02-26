@@ -4,7 +4,7 @@
 
 # MEMBERS
 
-* [Julian Valencia](https://github.com/jdvalencir)
+* [Julian Valencia](https://github.com/jdvalencir) 
 * [Juan Esteban Castro](https://github.com/Castro-1)
 * [David Gonzalez](https://github.com/dgonzalezt2)
 
@@ -18,18 +18,18 @@
 </div>
 
 # HOW TO RUN THE PROGRAM
-To run the TransformImagesOS, follow these steps:
+* To run the TransformImagesOS, follow these steps:
 
-Clone the Repository:
+* Clone the Repository:
 ```bash 
 git clone https://github.com/jdvalencir/TransformImagesOS.git
 ```
 
 # OPEN VISUAL STUDIO CODE
-Open the project folder in Visual Studio Code or any preferred code editor.
+* Open the project folder in Visual Studio Code or any preferred code editor.
 
 # OPEN TERMINAL
-Follow this steps for run the program:
+* Follow this steps for run the program:
 ```bash 
 g++ main.cpp BMPReadWrite/BMPReadWrite.cpp Mapping/Secuencial/Mapping.cpp Mapping/OpenMp/MappingOpenMP.cpp Menu/Menu.cpp Transformations/Transformatios.cpp -o transformations -fopenmp
 ```
